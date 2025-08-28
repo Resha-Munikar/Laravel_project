@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use HasFactory;
+    
     protected $table = 'posts';
 
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'title',
         'content',
@@ -20,8 +24,8 @@ class Post extends Model
         'content' => 'string',
         'user_id' => 'integer',
     ];
-
-     protected $hidden=[
+    protected $hidden=[
         'user_id',
     ];
+        
 }
