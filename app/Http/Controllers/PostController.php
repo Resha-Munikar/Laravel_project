@@ -1,35 +1,73 @@
 <?php
+
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use GuzzleHttp\Psr7\Request;
-class PostController extends Controller{
-    public function index(){
-        return 'testing post';
+
+use Illuminate\Http\Request;
+use App\Models\Post;
+
+class PostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return view ('chirps.index');
+        //
     }
 
-    public function create(){
-        //form to insert data
-        return "created";
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+                return "create";
     }
 
-    public function store(Request $request){
-        //form handling
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'content'=>'required|string|max:255',
+        ]);
+        Post::create($request->only('content'));
+        return redirect()->route('chirps.index');
+        // dd($request);
+
     }
 
-    public function show($id){
-        //to display specific resource
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
     }
 
-    public function edit($id){
-        //edit form
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
     }
 
-    public function update(Request $request){
-        //form handling to edit form
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
     }
 
-    public function destroy($id){
-        //delete the record
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
-?>
